@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evan Pritchard | Coding Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Portfolio of C#, Python, and database projects." />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="site-title">Evan Pritchard</h1>
+      <p class="site-subtitle">C# • Python • SQL/Databases</p>
+      <nav class="nav">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <h2>Hi, I build practical software and data apps.</h2>
+      <p>
+        I work across <strong>C# Windows Forms</strong>, <strong>Python data/ML</strong>, and
+        <strong>SQL databases</strong>. Below are a few featured projects. Each card links to the GitHub repo
+        and includes a short summary and stack tags.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="https://github.com/epritch" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="#contact">Download Résumé (PDF)</a>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <h3>Featured Projects</h3>
+
+      <h4 class="group-title">C# (Windows Forms)</h4>
+      <div class="grid">
+        <!-- Distance Converter -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/distance-converter.png" alt="Distance Converter screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>Distance Converter</h5>
+            <p>Converts between miles, kilometers, and meters with validation and unit tests.</p>
+            <ul class="tags"><li>C#</li><li>WinForms</li><li>.NET 8</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/DistanceConverter" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+
+        <!-- Time Zone App -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/time-zone-app.png" alt="Time Zone App screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>TimeZoneApp</h5>
+            <p>Displays local times across regions with search and copy-to-clipboard.</p>
+            <ul class="tags"><li>C#</li><li>WinForms</li><li>Time Zones</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/TimeZoneApp" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+
+        <!-- Preferred Customer -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/preferred-customer.png" alt="Preferred Customer screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>Preferred Customer</h5>
+            <p>Manages customers and computes discount tiers from cumulative purchases.</p>
+            <ul class="tags"><li>C#</li><li>OOP</li><li>WinForms</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/PreferredCustomer" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+
+        <!-- Dorm & Meal Plan Calculator -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/dorm-meal.png" alt="Dorm and Meal Plan Calculator screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>Dorm & Meal Plan Calculator</h5>
+            <p>Two-form app that computes and displays total housing charges by selections.</p>
+            <ul class="tags"><li>C#</li><li>WinForms</li><li>UX</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/DormMealCalculator" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+      </div>
+
+      <h4 class="group-title">Python (Data / ML)</h4>
+      <div class="grid">
+        <!-- Huffman Compression -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/huffman.png" alt="Huffman Compression screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>Huffman Compression</h5>
+            <p>Implements Huffman coding to compress/decompress files with CLI interface.</p>
+            <ul class="tags"><li>Python</li><li>Algorithms</li><li>CLI</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/CDSA.320" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+
+        <!-- Titanic EDA -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/titanic.png" alt="Titanic EDA plot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>Titanic EDA & Baseline Model</h5>
+            <p>Cleaned data, handled missing values, and built baseline classifiers for Kaggle.</p>
+            <ul class="tags"><li>Python</li><li>Pandas</li><li>scikit-learn</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/titanic-baseline" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+      </div>
+
+      <h4 class="group-title">Database Apps (SQL / WinForms)</h4>
+      <div class="grid">
+        <!-- Personnel DB -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/personnel.png" alt="Personnel database app screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>Personnel Manager</h5>
+            <p>SQL Server + WinForms app with DataGridView list and detail view sync.</p>
+            <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/PersonnelDBApp" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+
+        <!-- Product Search -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/product-search.png" alt="Product search app screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>Product Search</h5>
+            <p>Search by description with “Show All” and data-bound controls.</p>
+            <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/ProductSearchWinForms" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+
+        <!-- PopulationDB Tools -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/populationdb.png" alt="PopulationDB app screenshot" onerror="this.style.display='none'"/>
+          </div>
+          <div class="card-body">
+            <h5>PopulationDB Tools</h5>
+            <p>CRUD, sorting, and stats (sum/avg/min/max) on city populations.</p>
+            <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/PopulationDBApp" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <h3>About</h3>
+      <p>
+        I’m a software developer focused on building clear, user-friendly tools. I enjoy
+        algorithms (pathfinding, compression), data analysis (EDA, visualization), and
+        desktop apps that connect to SQL databases. Currently exploring .NET 8 patterns and
+        scikit-learn pipelines.
+      </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h3>Contact</h3>
+      <ul class="contact">
+        <li>GitHub: <a href="https://github.com/epritch" target="_blank" rel="noopener">@epritch</a></li>
+        <li>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">your-handle</a></li>
+        <li><a class="btn btn-ghost" href="resume.pdf">Download Résumé</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> Evan Pritchard • Built with GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script>
+    // stamp current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
