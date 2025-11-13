@@ -33,59 +33,67 @@
   </div>
 
   <script>
-    const API_URL = "https://manifestos-backend-1.onrender.com/api/chat";
-    
-    const form = document.getElementById("chat-form");
-    const input = document.getElementById("user-input");
-    const chatBox = document.getElementById("chat-box");
+  const form = document.getElementById("chat-form");
+  const input = document.getElementById("user-input");
+  const chatBox = document.getElementById("chat-box");
 
-    function addMessage(text, className) {
-      const msg = document.createElement("div");
-      msg.classList.add(className);
-      msg.innerHTML = `<p>${text}</p>`;
-      chatBox.appendChild(msg);
-      chatBox.scrollTop = chatBox.scrollHeight;
+  // --- Local AI Responses ---
+  function localAI(message) {
+    const msg = message.toLowerCase().trim();
+
+    if (msg.includes("hello") || msg.includes("hi")) {
+      return "Hello! I'm your Manifestos Helper. How can I assist you today?";
     }
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const message = input.value.trim();
-      if (!message) return;
+    if (msg.includes("manifesto")) {
+      return "A manifesto is a declaration of beliefs, values, and intentions. My manifesto is to help you explore ideas creatively and thoughtfully.";
+    }
 
-      // Show user message
-      addMessage(message, "user-message");
+    if (msg.includes("who are you")) {
+      return "I'm a locally powered AI assistant built just for your portfolio. I don't use external APIs — I respond using custom logic!";
+    }
 
-      // Show temporary "thinking" bot bubble
-      const thinking = document.createElement("div");
-      thinking.classList.add("bot-message");
-      thinking.innerHTML = "<p>Thinking...</p>";
-      chatBox.appendChild(thinking);
+    if (msg.includes("help")) {
+      return "Sure! Ask me about manifestos, ideas, creativity, or just say hello.";
+    }
+
+    // Default fallback
+    return "I'm not sure how to respond to that yet, but I'm learning!";
+  }
+
+  // --- Chat UI ---
+  function addMessage(text, className) {
+    const msg = document.createElement("div");
+    msg.classList.add(className);
+    msg.innerHTML = `<p>${text}</p>`;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Show user message
+    addMessage(message, "user-message");
+
+    // Simulate "thinking" bubble briefly
+    const thinking = document.createElement("div");
+    thinking.classList.add("bot-message");
+    thinking.innerHTML = "<p>Thinking...</p>";
+    chatBox.appendChild(thinking);
+
+    // Simulate a delay for realism
+    setTimeout(() => {
+      const reply = localAI(message);
+      thinking.innerHTML = `<p>${reply}</p>`;
       chatBox.scrollTop = chatBox.scrollHeight;
+    }, 500);
 
-      input.value = "";
+    input.value = "";
+  });
+</script>
 
-      try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ message })
-        });
-
-        if (!response.ok) {
-          throw new Error("Non-200 response");
-        }
-
-        const data = await response.json();
-        // server.js returns { reply: "..." }
-        thinking.innerHTML = `<p>${data.reply}</p>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
-      } catch (error) {
-        console.error(error);
-        thinking.innerHTML = `<p>⚠️ Error: Could not reach the chatbot API. Check the API_URL or backend.</p>`;
-      }
-    });
-  </script>
 </body>
 </html>
