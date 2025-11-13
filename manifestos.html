@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manifestos Chatbot | My Woodbury Helper</title>
+  <link rel="stylesheet" href="helper.css" />
+</head>
+<body>
+  <div class="chat-container">
+    <header>
+      <h1>Manifestos – My Woodbury Helper</h1>
+    </header>
+
+    <main id="chat-box">
+      <div class="bot-message">
+        <p>Hello! I’m your Woodbury Helper. Ask me about your manifestos, ideas, or projects.</p>
+      </div>
+    </main>
+
+    <form id="chat-form">
+      <input
+        type="text"
+        id="user-input"
+        placeholder="Type your message..."
+        autocomplete="off"
+      />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+
+    function addMessage(text, className) {
+      const msg = document.createElement("div");
+      msg.classList.add(className);
+      msg.innerHTML = `<p>${text}</p>`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
+
+      // show user message
+      addMessage(message, "user-message");
+
+      // placeholder bot reply
+      const thinking = document.createElement("div");
+      thinking.classList.add("bot-message");
+      thinking.innerHTML = "<p>Thinking...</p>";
+      chatBox.appendChild(thinking);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // DEMO reply (no backend on GitHub Pages)
+      setTimeout(() => {
+        thinking.innerHTML =
+          `<p>I'm the Manifestos demo bot. On this portfolio I'm running in demo mode, but on a full server version I can connect to real AI APIs.</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 1000);
+
+      input.value = "";
+    });
+  </script>
+</body>
+</html>
