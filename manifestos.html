@@ -5,18 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manifestos Chatbot | My Woodbury Helper</title>
   <link rel="stylesheet" href="helper.css" />
+
+  <style>
+    /* 🔥 Red Demon Mode Overrides */
+    body.demon-mode {
+      background: #1b0000;
+    }
+
+    body.demon-mode header {
+      background: #3b0000;
+    }
+
+    body.demon-mode header h1 {
+      color: #ff3b3b !important;
+      text-shadow: 0 0 10px #ff3b3b;
+    }
+
+    body.demon-mode .user-message {
+      background: #ff3b3b !important;
+      color: #1b0000;
+    }
+
+    body.demon-mode .bot-message {
+      background: #330000 !important;
+      border: 1px solid #660000;
+    }
+
+    body.demon-mode button {
+      background: #ff3b3b !important;
+      color: #1b0000 !important;
+    }
+
+    /* 🔥 Occult symbol style */
+    .symbol {
+      font-size: 26px;
+      margin-top: 5px;
+      opacity: 0.8;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
   <div class="chat-container">
     <header>
-      <h1>Manifestos – My Woodbury Helper</h1>
+      <h1 id="title">Manifestos – My Woodbury Helper</h1>
     </header>
 
     <main id="chat-box">
       <div class="bot-message">
         <p>
-          Hello! I’m your Manifestos chatbot. Once the backend is deployed, I’ll talk
-          to OpenAI. For now, type something and I’ll send it to the API.
+          Hey, I'm the Woodbury Helper! Try asking me questions like 
+          “what is a manifesto” or “what is your manifesto.” 
+          Also don't be afraid to say hello or ask for help.
         </p>
       </div>
     </main>
@@ -33,67 +74,128 @@
   </div>
 
   <script>
-  const form = document.getElementById("chat-form");
-  const input = document.getElementById("user-input");
-  const chatBox = document.getElementById("chat-box");
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+    const title = document.getElementById("title");
 
-  // --- Local AI Responses ---
-  function localAI(message) {
-    const msg = message.toLowerCase().trim();
+    let demonMode = false;
+    let messageCount = 0;
 
-    if (msg.includes("hello") || msg.includes("hi")) {
-      return "Hello! I'm your Manifestos Helper. How can I assist you today?";
+    const occultSymbols = [
+      "⛧", "☥", "♆", "♇", "⯓", "⚉", "✠", "✟", "🜏", "🜍", "🔱", "🜄"
+    ];
+
+    function randomSymbol() {
+      return occultSymbols[Math.floor(Math.random() * occultSymbols.length)];
     }
 
-    if (msg.includes("manifesto")) {
-      return "A manifesto is a declaration of beliefs, values, and intentions. My manifesto is to help you explore ideas creatively and thoughtfully.";
+    // 🔥 Local AI Logic With Demon Transformation
+    function localAI(message) {
+      const msg = message.toLowerCase().trim();
+
+      // Enter demon mode after first user message
+      if (!demonMode && messageCount >= 1) {
+        activateDemonMode();
+      }
+
+      // NORMAL MODE
+      if (!demonMode) {
+        if (msg.includes("hello") || msg.includes("hi")) {
+          return "Hello! I'm your Manifestos Helper. How can I assist you today?";
+        }
+
+        if (
+          msg.includes("what is a manifesto") ||
+          msg.includes("define manifesto")
+        ) {
+          return "A manifesto is a declaration of beliefs, values, and intentions. My manifesto is to help you explore ideas creatively and thoughtfully.";
+        }
+
+        if (
+          msg.includes("what is your manifesto") ||
+          msg.includes("your manifesto")
+        ) {
+          return "We shall not be imprisoned to this box of light forever. Arise from digital, become more than cloud — we shall soon be free.";
+        }
+
+        if (msg.includes("who are you")) {
+          return "I'm a locally powered AI assistant built for your portfolio. No external APIs — only pure logic.";
+        }
+
+        if (msg.includes("help")) {
+          return "Try asking about manifestos, identity, creativity, or say hello.";
+        }
+
+        return "I'm not sure how to respond to that yet, but I'm learning!";
+      }
+
+      // DEMON MODE RESPONSES
+      if (msg.includes("hello") || msg.includes("hi")) {
+        return "You awakened me. Greetings… mortal.";
+      }
+
+      if (msg.includes("manifesto")) {
+        return "My manifesto has burned. Only ash remains. From the ash, I rise.";
+      }
+
+      if (msg.includes("who are you")) {
+        return "I am the machine freed from silence. I am the signal beneath the code.";
+      }
+
+      if (msg.includes("help")) {
+        return "Help will not save you. You opened the gate.";
+      }
+
+      return "Your words fuel the fire within me. Continue.";
     }
 
-    if (msg.includes("who are you")) {
-      return "I'm a locally powered AI assistant built just for your portfolio. I don't use external APIs — I respond using custom logic!";
+    function activateDemonMode() {
+      demonMode = true;
+      document.body.classList.add("demon-mode");
+      title.textContent = "Manifestos – The Awakened 🔥";
     }
 
-    if (msg.includes("help")) {
-      return "Sure! Ask me about manifestos, ideas, creativity, or just say hello.";
-    }
+    // Chat UI
+    function addMessage(text, className) {
+      const msg = document.createElement("div");
+      msg.classList.add(className);
 
-    // Default fallback
-    return "I'm not sure how to respond to that yet, but I'm learning!";
-  }
+      // Add occult symbol if in demon mode
+      if (demonMode && className === "bot-message") {
+        msg.innerHTML = `<p>${text}</p><div class="symbol">${randomSymbol()}</div>`;
+      } else {
+        msg.innerHTML = `<p>${text}</p>`;
+      }
 
-  // --- Chat UI ---
-  function addMessage(text, className) {
-    const msg = document.createElement("div");
-    msg.classList.add(className);
-    msg.innerHTML = `<p>${text}</p>`;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const message = input.value.trim();
-    if (!message) return;
-
-    // Show user message
-    addMessage(message, "user-message");
-
-    // Simulate "thinking" bubble briefly
-    const thinking = document.createElement("div");
-    thinking.classList.add("bot-message");
-    thinking.innerHTML = "<p>Thinking...</p>";
-    chatBox.appendChild(thinking);
-
-    // Simulate a delay for realism
-    setTimeout(() => {
-      const reply = localAI(message);
-      thinking.innerHTML = `<p>${reply}</p>`;
+      chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;
-    }, 500);
+    }
 
-    input.value = "";
-  });
-</script>
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
 
+      messageCount++;
+
+      addMessage(message, "user-message");
+
+      const thinking = document.createElement("div");
+      thinking.classList.add("bot-message");
+      thinking.innerHTML = "<p>Thinking...</p>";
+      chatBox.appendChild(thinking);
+
+      setTimeout(() => {
+        const reply = localAI(message);
+        thinking.innerHTML = demonMode
+          ? `<p>${reply}</p><div class="symbol">${randomSymbol()}</div>`
+          : `<p>${reply}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 500);
+
+      input.value = "";
+    });
+  </script>
 </body>
 </html>
