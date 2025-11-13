@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manifestos Chatbot | My Woodbury Helper</title>
+  <!-- Uses the chatbot-specific CSS file -->
   <link rel="stylesheet" href="helper.css" />
 </head>
 <body>
@@ -14,7 +15,10 @@
 
     <main id="chat-box">
       <div class="bot-message">
-        <p>Hello! I’m your Woodbury Helper. Ask me about your manifestos, ideas, or projects.</p>
+        <p>
+          Hello! I’m your Manifestos chatbot. Once the backend is deployed, I’ll talk
+          to OpenAI. For now, type something and I’ll send it to the API.
+        </p>
       </div>
     </main>
 
@@ -29,59 +33,63 @@
     </form>
   </div>
 
-  <script type="module">
-  import OpenAI from "https://esm.sh/openai";
+  <script>
+    // 🔴 IMPORTANT:
+    // After you deploy your backend on Render, replace this URL with your real one.
+    // It will look like: https://your-service-name.onrender.com/api/chat
+    const API_URL = "https://YOUR-RENDER-SERVICE.onrender.com/api/chat";
 
-  const client = new OpenAI({
-    apiKey: "API key here",
-    dangerouslyAllowBrowser: true
-  });
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
 
-  const form = document.getElementById("chat-form");
-  const input = document.getElementById("user-input");
-  const chatBox = document.getElementById("chat-box");
-
-  function addMessage(text, className) {
-    const msg = document.createElement("div");
-    msg.classList.add(className);
-    msg.innerHTML = `<p>${text}</p>`;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const message = input.value.trim();
-    if (!message) return;
-
-    addMessage(message, "user-message");
-
-    const thinking = document.createElement("div");
-    thinking.classList.add("bot-message");
-    thinking.innerHTML = "<p>Thinking...</p>";
-    chatBox.appendChild(thinking);
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    try {
-      const response = await client.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: "You are My Woodbury Helper, a friendly AI chatbot." },
-          { role: "user", content: message }
-        ]
-      });
-
-      thinking.innerHTML = `<p>${response.choices[0].message.content}</p>`;
+    function addMessage(text, className) {
+      const msg = document.createElement("div");
+      msg.classList.add(className);
+      msg.innerHTML = `<p>${text}</p>`;
+      chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;
-    } catch (error) {
-      thinking.innerHTML = `<p>⚠️ Error: Check your API key or CORS domain restriction.</p>`;
     }
 
-    input.value = "";
-  });
-</script>
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
 
+      // Show user message
+      addMessage(message, "user-message");
+
+      // Show temporary "thinking" bot bubble
+      const thinking = document.createElement("div");
+      thinking.classList.add("bot-message");
+      thinking.innerHTML = "<p>Thinking...</p>";
+      chatBox.appendChild(thinking);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      input.value = "";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message })
+        });
+
+        if (!response.ok) {
+          throw new Error("Non-200 response");
+        }
+
+        const data = await response.json();
+        // server.js returns { reply: "..." }
+        thinking.innerHTML = `<p>${data.reply}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      } catch (error) {
+        console.error(error);
+        thinking.innerHTML = `<p>⚠️ Error: Could not reach the chatbot API. Check the API_URL or backend.</p>`;
+      }
+    });
+  </script>
 </body>
 </html>
