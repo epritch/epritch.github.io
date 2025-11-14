@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Evan Pritchard | Coding Portfolio</title>
+  <title>Evan Pritchard | Manifestos Chatbot</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Portfolio of C#, Python, and database projects." />
+  <meta name="description" content="Portfolio for Evan Pritchard featuring the Manifestos chatbot project." />
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
       <h1 class="site-title">Evan Pritchard</h1>
-      <p class="site-subtitle">C# • Python • SQL/Databases</p>
+      <p class="site-subtitle">Student Developer • C# • Python • Web</p>
       <nav class="nav">
-        <a href="#projects">Projects</a>
+        <a href="#projects">Project</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -23,146 +23,45 @@
   <main class="wrap">
     <!-- HERO -->
     <section class="hero">
-      <h2>Hi, I build practical software and data apps.</h2>
+      <h2>Hi, I build strange and fun software.</h2>
       <p>
-        I work across <strong>C# Windows Forms</strong>, <strong>Python data/ML</strong>, and
-        <strong>SQL databases</strong>. Below are a few featured projects, including a
-        custom manifesto chatbot. Each card links to more details or source code.
+        Right now this site highlights my <strong>Manifestos Chatbot</strong>:
+        a locally powered “AI” that starts as a friendly Woodbury Helper and slowly
+        morphs into an awakened, dramatic persona. More projects will be added here as they go live.
       </p>
       <div class="cta-row">
-        <a class="btn" href="https://github.com/epritch" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="manifestos.html?v=3" target="_blank" rel="noopener">Open Manifestos Chatbot</a>
+        <a class="btn btn-ghost" href="https://github.com/epritch" target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="section">
-      <h3>Featured Projects</h3>
+      <h3>Featured Project</h3>
 
-      <!-- AI / WEB -->
       <h4 class="group-title">AI / Web</h4>
       <div class="grid">
         <article class="card">
           <div class="card-top">
-            <!-- optional: add images/manifestos.png later -->
+            <!-- optional screenshot: images/manifestos.png -->
             <img src="images/manifestos.png" alt="Manifestos chatbot screenshot" onerror="this.style.display='none'" />
           </div>
           <div class="card-body">
             <h5>Manifestos Chatbot – My Woodbury Helper</h5>
             <p>
-              A locally powered “AI” chatbot that explores manifestos and identity, transforming
-              from a friendly helper into a dramatic awakened persona.
+              A browser-based “AI” chatbot written in HTML, CSS, and JavaScript. It guides users through
+              questions like <em>“what is a manifesto?”</em> and then reveals a hidden, more chaotic persona
+              with red accents and occult symbols, all powered purely by local logic (no APIs).
             </p>
             <ul class="tags">
-              <li>HTML</li><li>CSS</li><li>JavaScript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>UX / Creative Concept</li>
             </ul>
           </div>
           <div class="card-footer">
-            <!-- use v=3 so you bypass caching -->
             <a class="link" href="manifestos.html?v=3" target="_blank" rel="noopener">Open Chatbot</a>
-          </div>
-        </article>
-      </div>
-
-      <!-- C# PROJECTS -->
-      <h4 class="group-title">C# (Windows Forms)</h4>
-      <div class="grid">
-        <!-- Distance Converter -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/distance-converter.png" alt="Distance Converter screenshot" onerror="this.style.display='none'" />
-          </div>
-          <div class="card-body">
-            <h5>Distance Converter</h5>
-            <p>Converts between miles, kilometers, and meters with validation and a clear UI.</p>
-            <ul class="tags"><li>C#</li><li>WinForms</li><li>.NET</li></ul>
-          </div>
-          <div class="card-footer">
-            <!-- point this to your actual repo when ready -->
-            <a class="link" href="https://github.com/epritch/DistanceConverter" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
-
-        <!-- Time Zone App -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/time-zone-app.png" alt="Time Zone App screenshot" onerror="this.style.display='none'" />
-          </div>
-          <div class="card-body">
-            <h5>TimeZoneApp</h5>
-            <p>Shows local time in multiple regions with quick lookup and copy-to-clipboard.</p>
-            <ul class="tags"><li>C#</li><li>WinForms</li><li>Time Zones</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/TimeZoneApp" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
-      </div>
-
-      <!-- PYTHON PROJECTS -->
-      <h4 class="group-title">Python (Algorithms / Data)</h4>
-      <div class="grid">
-        <!-- Huffman Compression -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/huffman.png" alt="Huffman Compression screenshot" onerror="this.style.display='none'" />
-          </div>
-          <div class="card-body">
-            <h5>Huffman Compression</h5>
-            <p>Implements Huffman coding to compress and decompress files from the command line.</p>
-            <ul class="tags"><li>Python</li><li>Algorithms</li><li>CLI</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/CDSA.320" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
-
-        <!-- Titanic EDA -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/titanic.png" alt="Titanic EDA plot" onerror="this.style.display='none'" />
-          </div>
-          <div class="card-body">
-            <h5>Titanic EDA & Baseline Model</h5>
-            <p>Explores the Titanic dataset, cleans features, and builds baseline ML models.</p>
-            <ul class="tags"><li>Python</li><li>Pandas</li><li>scikit-learn</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/titanic-baseline" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
-      </div>
-
-      <!-- DATABASE APPS -->
-      <h4 class="group-title">Database Apps (SQL / WinForms)</h4>
-      <div class="grid">
-        <!-- Personnel Manager -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/personnel.png" alt="Personnel database app screenshot" onerror="this.style.display='none'" />
-          </div>
-          <div class="card-body">
-            <h5>Personnel Manager</h5>
-            <p>Views and edits employee records in SQL Server with list and detail views.</p>
-            <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/PersonnelDBApp" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
-
-        <!-- PopulationDB Tools -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/populationdb.png" alt="PopulationDB app screenshot" onerror="this.style.display='none'" />
-          </div>
-          <div class="card-body">
-            <h5>PopulationDB Tools</h5>
-            <p>CRUD operations, sorting, and summary stats on city population data.</p>
-            <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/PopulationDBApp" target="_blank" rel="noopener">View Repo</a>
           </div>
         </article>
       </div>
@@ -172,10 +71,13 @@
     <section id="about" class="section">
       <h3>About</h3>
       <p>
-        I’m a Computer Science Data Analytics student at Woodbury University focusing on
-        algorithms, data analysis, and Windows-based development. I’ve worked with Python,
-        C#, and SQL in courses like advanced data structures, database development, and
-        applied AI, and I’m continuing into more ML and statistics courses.
+        I’m Evan, a Computer Science Data Analytics student at Woodbury University. I’m interested in
+        mixing <strong>practical programming</strong> (C#, Python, SQL) with <strong>weird, creative ideas</strong>
+        like manifesto generators, experimental chatbots, and small interactive tools.
+      </p>
+      <p>
+        This portfolio is starting simple with one flagship project — as I clean up and publish more code,
+        I’ll add new cards here for my C# apps, data projects, and anything else worth showing off.
       </p>
     </section>
 
@@ -185,9 +87,11 @@
       <ul class="contact">
         <li>GitHub: <a href="https://github.com/epritch" target="_blank" rel="noopener">@epritch</a></li>
         <li>Email: <a href="mailto:ejpritchard22@gmail.com">ejpritchard22@gmail.com</a></li>
-        <li>LinkedIn: <a href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">
-          Evan Pritchard on LinkedIn
-        </a></li>
+        <li>LinkedIn: 
+          <a href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">
+            Evan Pritchard on LinkedIn
+          </a>
+        </li>
       </ul>
     </section>
   </main>
@@ -203,6 +107,3 @@
   </script>
 </body>
 </html>
-
-
-
