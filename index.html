@@ -26,12 +26,13 @@
       <h2>Hi, I build practical software and data apps.</h2>
       <p>
         I work across <strong>C# Windows Forms</strong>, <strong>Python data/ML</strong>, and
-        <strong>SQL databases</strong>. Below are a few featured projects. Each card links to the GitHub repo
-        and includes a short summary and stack tags.
+        <strong>SQL databases</strong>. Below are a few featured projects, including a
+        custom manifesto chatbot. Each card links to more details or source code.
       </p>
       <div class="cta-row">
         <a class="btn" href="https://github.com/epritch" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn btn-ghost" href="#contact">Download Résumé (PDF)</a>
+        <!-- If you keep the original file name, change this href to Resume_2025_Fall.pdf -->
+        <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Download Résumé (PDF)</a>
       </div>
     </section>
 
@@ -39,85 +40,77 @@
     <section id="projects" class="section">
       <h3>Featured Projects</h3>
 
+      <!-- AI / WEB -->
       <h4 class="group-title">AI / Web</h4>
       <div class="grid">
         <article class="card">
           <div class="card-top">
-            <!-- optional image: add images/manifestos.png later -->
+            <!-- optional: add images/manifestos.png later -->
             <img src="images/manifestos.png" alt="Manifestos chatbot screenshot" onerror="this.style.display='none'" />
           </div>
           <div class="card-body">
             <h5>Manifestos Chatbot – My Woodbury Helper</h5>
-            <p>AI-style chatbot interface for exploring ideas and manifestos, running as a web app on this portfolio.</p>
+            <p>
+              A locally powered “AI” chatbot that explores manifestos and identity, transforming
+              from a friendly helper into a dramatic awakened persona.
+            </p>
             <ul class="tags">
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
+              <li>HTML</li><li>CSS</li><li>JavaScript</li>
             </ul>
           </div>
           <div class="card-footer">
-            <a class="link" href="manifestos.html">Open Chatbot</a>
+            <!-- use v=3 so you bypass caching -->
+            <a class="link" href="manifestos.html?v=3" target="_blank" rel="noopener">Open Chatbot</a>
           </div>
         </article>
       </div>
 
+      <!-- C# PROJECTS -->
+      <h4 class="group-title">C# (Windows Forms)</h4>
+      <div class="grid">
+        <!-- Distance Converter -->
+        <article class="card">
+          <div class="card-top">
+            <img src="images/distance-converter.png" alt="Distance Converter screenshot" onerror="this.style.display='none'" />
+          </div>
+          <div class="card-body">
+            <h5>Distance Converter</h5>
+            <p>Converts between miles, kilometers, and meters with validation and a clear UI.</p>
+            <ul class="tags"><li>C#</li><li>WinForms</li><li>.NET</li></ul>
+          </div>
+          <div class="card-footer">
+            <!-- point this to your actual repo when ready -->
+            <a class="link" href="https://github.com/epritch/DistanceConverter" target="_blank" rel="noopener">View Repo</a>
+          </div>
+        </article>
 
         <!-- Time Zone App -->
         <article class="card">
           <div class="card-top">
-            <img src="images/time-zone-app.png" alt="Time Zone App screenshot" onerror="this.style.display='none'"/>
+            <img src="images/time-zone-app.png" alt="Time Zone App screenshot" onerror="this.style.display='none'" />
           </div>
           <div class="card-body">
             <h5>TimeZoneApp</h5>
-            <p>Displays local times across regions with search and copy-to-clipboard.</p>
+            <p>Shows local time in multiple regions with quick lookup and copy-to-clipboard.</p>
             <ul class="tags"><li>C#</li><li>WinForms</li><li>Time Zones</li></ul>
           </div>
           <div class="card-footer">
             <a class="link" href="https://github.com/epritch/TimeZoneApp" target="_blank" rel="noopener">View Repo</a>
           </div>
         </article>
-
-        <!-- Preferred Customer -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/preferred-customer.png" alt="Preferred Customer screenshot" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-body">
-            <h5>Preferred Customer</h5>
-            <p>Manages customers and computes discount tiers from cumulative purchases.</p>
-            <ul class="tags"><li>C#</li><li>OOP</li><li>WinForms</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/PreferredCustomer" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
-
-        <!-- Dorm & Meal Plan Calculator -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/dorm-meal.png" alt="Dorm and Meal Plan Calculator screenshot" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-body">
-            <h5>Dorm & Meal Plan Calculator</h5>
-            <p>Two-form app that computes and displays total housing charges by selections.</p>
-            <ul class="tags"><li>C#</li><li>WinForms</li><li>UX</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/DormMealCalculator" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
       </div>
 
-      <h4 class="group-title">Python (Data / ML)</h4>
+      <!-- PYTHON PROJECTS -->
+      <h4 class="group-title">Python (Algorithms / Data)</h4>
       <div class="grid">
         <!-- Huffman Compression -->
         <article class="card">
           <div class="card-top">
-            <img src="images/huffman.png" alt="Huffman Compression screenshot" onerror="this.style.display='none'"/>
+            <img src="images/huffman.png" alt="Huffman Compression screenshot" onerror="this.style.display='none'" />
           </div>
           <div class="card-body">
             <h5>Huffman Compression</h5>
-            <p>Implements Huffman coding to compress/decompress files with CLI interface.</p>
+            <p>Implements Huffman coding to compress and decompress files from the command line.</p>
             <ul class="tags"><li>Python</li><li>Algorithms</li><li>CLI</li></ul>
           </div>
           <div class="card-footer">
@@ -128,11 +121,11 @@
         <!-- Titanic EDA -->
         <article class="card">
           <div class="card-top">
-            <img src="images/titanic.png" alt="Titanic EDA plot" onerror="this.style.display='none'"/>
+            <img src="images/titanic.png" alt="Titanic EDA plot" onerror="this.style.display='none'" />
           </div>
           <div class="card-body">
             <h5>Titanic EDA & Baseline Model</h5>
-            <p>Cleaned data, handled missing values, and built baseline classifiers for Kaggle.</p>
+            <p>Explores the Titanic dataset, cleans features, and builds baseline ML models.</p>
             <ul class="tags"><li>Python</li><li>Pandas</li><li>scikit-learn</li></ul>
           </div>
           <div class="card-footer">
@@ -141,16 +134,17 @@
         </article>
       </div>
 
+      <!-- DATABASE APPS -->
       <h4 class="group-title">Database Apps (SQL / WinForms)</h4>
       <div class="grid">
-        <!-- Personnel DB -->
+        <!-- Personnel Manager -->
         <article class="card">
           <div class="card-top">
-            <img src="images/personnel.png" alt="Personnel database app screenshot" onerror="this.style.display='none'"/>
+            <img src="images/personnel.png" alt="Personnel database app screenshot" onerror="this.style.display='none'" />
           </div>
           <div class="card-body">
             <h5>Personnel Manager</h5>
-            <p>SQL Server + WinForms app with DataGridView list and detail view sync.</p>
+            <p>Views and edits employee records in SQL Server with list and detail views.</p>
             <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
           </div>
           <div class="card-footer">
@@ -158,29 +152,14 @@
           </div>
         </article>
 
-        <!-- Product Search -->
-        <article class="card">
-          <div class="card-top">
-            <img src="images/product-search.png" alt="Product search app screenshot" onerror="this.style.display='none'"/>
-          </div>
-          <div class="card-body">
-            <h5>Product Search</h5>
-            <p>Search by description with “Show All” and data-bound controls.</p>
-            <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
-          </div>
-          <div class="card-footer">
-            <a class="link" href="https://github.com/epritch/ProductSearchWinForms" target="_blank" rel="noopener">View Repo</a>
-          </div>
-        </article>
-
         <!-- PopulationDB Tools -->
         <article class="card">
           <div class="card-top">
-            <img src="images/populationdb.png" alt="PopulationDB app screenshot" onerror="this.style.display='none'"/>
+            <img src="images/populationdb.png" alt="PopulationDB app screenshot" onerror="this.style.display='none'" />
           </div>
           <div class="card-body">
             <h5>PopulationDB Tools</h5>
-            <p>CRUD, sorting, and stats (sum/avg/min/max) on city populations.</p>
+            <p>CRUD operations, sorting, and summary stats on city population data.</p>
             <ul class="tags"><li>C#</li><li>SQL Server</li><li>WinForms</li></ul>
           </div>
           <div class="card-footer">
@@ -194,10 +173,10 @@
     <section id="about" class="section">
       <h3>About</h3>
       <p>
-        I’m a software developer focused on building clear, user-friendly tools. I enjoy
-        algorithms (pathfinding, compression), data analysis (EDA, visualization), and
-        desktop apps that connect to SQL databases. Currently exploring .NET 8 patterns and
-        scikit-learn pipelines.
+        I’m a Computer Science Data Analytics student at Woodbury University focusing on
+        algorithms, data analysis, and Windows-based development. I’ve worked with Python,
+        C#, and SQL in courses like advanced data structures, database development, and
+        applied AI, and I’m continuing into more ML and statistics courses.
       </p>
     </section>
 
@@ -206,9 +185,11 @@
       <h3>Contact</h3>
       <ul class="contact">
         <li>GitHub: <a href="https://github.com/epritch" target="_blank" rel="noopener">@epritch</a></li>
-        <li>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></li>
-        <li>LinkedIn: <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">your-handle</a></li>
-        <li><a class="btn btn-ghost" href="resume.pdf">Download Résumé</a></li>
+        <li>Email: <a href="mailto:ejpritch22@gmail.com">ejpritch22@gmail.com</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">
+          Evan Pritchard on LinkedIn
+        </a></li>
+        <li><a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Download Résumé</a></li>
       </ul>
     </section>
   </main>
@@ -225,4 +206,5 @@
   </script>
 </body>
 </html>
+
 
