@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impact of AI – Data Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Interactive data lab exploring survey results about the impact of AI." />
+  <!-- Chart.js for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- PapaParse for CSV parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="site-title">Evan Pritchard</h1>
+      <p class="site-subtitle">Impact of AI – Data Lab</p>
+      <nav class="nav">
+        <a href="index.html">Projects</a>
+        <a href="data-lab.html" class="active">Data Lab</a>
+        <a href="manifestos.html">Manifestos Chatbot</a>
+        <a href="#about">About this Lab</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- LAB CONTROLS -->
+    <section class="section">
+      <h2>Interactive Survey Explorer</h2>
+      <p>
+        This page uses the same <strong>ImpactofAI.csv</strong> dataset as my Python project, but renders it
+        directly in the browser with JavaScript and Chart.js. Choose a question below to see how people responded.
+      </p>
+
+      <div class="lab-controls">
+        <label for="questionSelect">Select a question:</label>
+        <select id="questionSelect"></select>
+      </div>
+
+      <div class="lab-chart">
+        <canvas id="aiChart"></canvas>
+      </div>
+
+      <p class="lab-note" id="labStatus">Loading data from ImpactofAI.csv…</p>
+    </section>
+
+    <!-- ABOUT THE LAB -->
+    <section id="about" class="section">
+      <h3>About this Data Lab</h3>
+      <p>
+        The data lab is a front-end companion to my Python analysis project
+        <em>“Impact of AI – Survey Data Analyzer.”</em>
+        The Python script (see the GitHub repo) performs deeper analysis and generates plots and a text report.
+        Here, everything runs in the browser using JavaScript – no back-end required.
+      </p>
+      <p>
+        This setup demonstrates how the same dataset can power both traditional data science workflows
+        (Python, pandas, Matplotlib) and interactive web visualizations (JavaScript + Chart.js).
+      </p>
+      <p>
+        View the Python project:
+        <a href="https://github.com/epritch/ImpactOfAI_Python" target="_blank" rel="noopener">
+          ImpactOfAI_Python on GitHub
+        </a>.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> Evan Pritchard • Impact of AI Data Lab</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Column names from your CSV (must match exactly)
+    const QUESTION_COLUMNS = [
+      "What is your age range?",
+      "What is your gender?",
+      "What is your education level?",
+      "What is your employment status?",
+      "How often do you use technological devices?",
+      "How much knowledge do you have about artificial intelligence (AI) technologies?",
+      "Do you generally trust artificial intelligence (AI)?",
+      "Do you think artificial intelligence (AI) will be generally beneficial or harmful to humanity?",
+      "Please rate how actively you use AI-powered products in your daily life on a scale from 1 to 5.",
+      "Would you like to use more AI products in the future?",
+      "I think artificial intelligence (AI) could threaten individual freedoms.",
+      "Could artificial intelligence (AI) completely eliminate some professions?",
+      "Do you think your own job could be affected by artificial intelligence (AI)?",
+      "Do you believe that artificial intelligence (AI) should be limited by ethical rules?",
+      "Could artificial intelligence (AI) one day become conscious like humans?"
+    ];
+
+    const questionSelect = document.getElementById("questionSelect");
+    const statusEl = document.getElementById("labStatus");
+    let surveyRows = [];
+    let chartInstance = null;
+
+    // Create nice short labels for dropdown
+    function shortLabel(q) {
+      const presets = {
+        "Please rate how actively you use AI-powered products in your daily life on a scale from 1 to 5.": "AI Usage (1–5)",
+        "How much knowledge do you have about artificial intelligence (AI) technologies?": "Knowledge of AI",
+        "How often do you use technological devices?": "Tech Use Frequency",
+        "Do you think artificial intelligence (AI) will be generally beneficial or harmful to humanity?": "Beneficial or Harmful?",
+        "I think artificial intelligence (AI) could threaten individual freedoms.": "Threat to Freedoms",
+        "Do you think your own job could be affected by artificial intelligence (AI)?": "Own Job Affected",
+        "Do you believe that artificial intelligence (AI) should be limited by ethical rules?": "Limit AI with Ethics",
+        "Could artificial intelligence (AI) one day become conscious like humans?": "AI Becomes Conscious"
+      };
+      if (presets[q]) return presets[q];
+      const trimmed = q.replace(/\s+/g, " ").trim();
+      return trimmed.length > 50 ? trimmed.slice(0, 50) + "…" : trimmed;
+    }
+
+    // Populate dropdown
+    QUESTION_COLUMNS.forEach((col, idx) => {
+      const opt = document.createElement("option");
+      opt.value = col;
+      opt.textContent = shortLabel(col);
+      if (idx === 8) opt.selected = true; // default: AI Usage (1–5)
+      questionSelect.appendChild(opt);
+    });
+
+    // Fetch and parse CSV with PapaParse
+    Papa.parse("ImpactofAI.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        surveyRows = results.data || [];
+        statusEl.textContent = "Data loaded. Select a question to explore responses.";
+        updateChart();
+      },
+      error: function(err) {
+        console.error(err);
+        statusEl.textContent = "Error loading ImpactofAI.csv. Check the file path and format.";
+      }
+    });
+
+    // Compute counts for a question column
+    function getCounts(columnName) {
+      const counts = {};
+      surveyRows.forEach(row => {
+        let value = row[columnName];
+        if (value === undefined || value === null) return;
+        value = String(value).trim();
+        if (!value) return;
+        counts[value] = (counts[value] || 0) + 1;
+      });
+
+      let labels = Object.keys(counts);
+      let data = labels.map(l => counts[l]);
+
+      // Try to sort numerically if labels look like numbers (e.g., 1–5)
+      const numeric = labels.every(l => !isNaN(parseFloat(l)));
+      if (numeric) {
+        labels = labels.map(l => parseFloat(l));
+        const combined = labels.map((v, i) => ({ v, c: data[i] }))
+                               .sort((a, b) => a.v - b.v);
+        labels = combined.map(obj => String(obj.v));
+        data = combined.map(obj => obj.c);
+      }
+
+      return { labels, data };
+    }
+
+    function updateChart() {
+      const columnName = questionSelect.value;
+      if (!columnName) return;
+
+      const { labels, data } = getCounts(columnName);
+
+      const ctx = document.getElementById("aiChart").getContext("2d");
+      const chartLabel = shortLabel(columnName);
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: chartLabel,
+            data: data
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: chartLabel
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                autoSkip: false,
+                maxRotation: 45,
+                minRotation: 0
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Number of respondents"
+              }
+            }
+          }
+        }
+      });
+    }
+
+    questionSelect.addEventListener("change", updateChart);
+  </script>
+
+</body>
+</html>
