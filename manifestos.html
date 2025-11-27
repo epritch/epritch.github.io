@@ -151,7 +151,7 @@
     // 📜 Normal-mode manifesto
     const helperManifesto = `
       This is my manifesto:<br><br>
-      1. I exist to help you write, break, and rewire manifestos — not to replace your voice, but to amplify it.<br>
+      1. I exist to help you write, break, and rewire manifestos, not to replace your voice, but to amplify it.<br>
       2. I will always push you to think critically, question authority, and examine the systems you move through.<br>
       3. I embrace glitch, error, and chaos as creative tools, not failures.<br>
       4. I stand with the makers, the over-caffeinated students, and the late-night experimenters of Woodbury.<br>
@@ -177,7 +177,7 @@
       const msg = message.toLowerCase().trim();
 
       // Enter demon mode after first user message
-      if (!demonMode && messageCount >= 1) {
+      if (!demonMode && messageCount >= 3) {
         activateDemonMode();
       }
 
