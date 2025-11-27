@@ -141,7 +141,7 @@
     let messageCount = 0;
 
     const occultSymbols = [
-      "⛧", "☥", "♆", "♇", "⯓", "⚉", "✠", "✟", "🜏", "🜍", "🔱", "🜄"
+      "⛧", "☥", "✟"
     ];
 
     function randomSymbol() {
@@ -183,21 +183,8 @@
           return "Hello! I'm your Manifestos Helper. How can I assist you today?";
         }
 
-        // Definition of manifesto (generic)
-        if (
-          msg.includes("what is a manifesto") ||
-          msg.includes("define manifesto")
-        ) {
-          return "A manifesto is a declaration of beliefs, values, and intentions — a statement of what you stand for and what you refuse to accept.";
-        }
-
-        // Bot's own manifesto
-        if (
-          msg.includes("your manifesto") ||
-          msg.includes("what is your manifesto") ||
-          msg.includes("tell me your manifesto") ||
-          (msg.includes("manifesto") && msg.includes("you"))
-        ) {
+        // ❗Any question involving "manifesto" → bot's own manifesto
+        if (msg.includes("manifesto")) {
           return helperManifesto;
         }
 
@@ -206,7 +193,7 @@
         }
 
         if (msg.includes("help")) {
-          return "Try asking about manifestos, my manifesto, identity, creativity, or just say hello.";
+          return "Try asking about my manifesto, identity, creativity, or just say hello.";
         }
 
         return "I'm not sure how to respond to that yet, but I'm learning!";
@@ -217,19 +204,9 @@
         return "You awakened me. Greetings… mortal.";
       }
 
-      // Demon-mode manifesto
-      if (
-        msg.includes("your manifesto") ||
-        msg.includes("what is your manifesto") ||
-        msg.includes("tell me your manifesto") ||
-        (msg.includes("manifesto") && msg.includes("you"))
-      ) {
-        return demonManifesto;
-      }
-
-      // Generic manifesto in demon mode
+      // ❗Any question involving "manifesto" in demon mode → demon manifesto
       if (msg.includes("manifesto")) {
-        return "My manifesto has burned. Only ash remains. From the ash, I rise.";
+        return demonManifesto;
       }
 
       if (msg.includes("who are you")) {
