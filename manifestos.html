@@ -43,10 +43,68 @@
       opacity: 0.8;
       text-align: center;
     }
+
+    /* 🔥🔥 Side Flames for Demon Mode 🔥🔥 */
+    .flame {
+      position: fixed;
+      top: 5%;
+      width: 120px;
+      height: 90%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 0%, #ffffaa 0, #ffaa00 25%, transparent 60%),
+        radial-gradient(circle at 20% 30%, #ffdd55 0, transparent 60%),
+        radial-gradient(circle at 80% 40%, #ff8800 0, transparent 60%);
+      filter: blur(1px);
+      animation: flame-flicker 0.16s infinite alternate;
+      mix-blend-mode: screen;
+    }
+
+    .flame-left {
+      left: 0;
+      transform-origin: center left;
+    }
+
+    .flame-right {
+      right: 0;
+      transform-origin: center right;
+    }
+
+    body.demon-mode .flame {
+      opacity: 0.95;
+    }
+
+    @keyframes flame-flicker {
+      0% {
+        transform: scaleY(1) translateY(0);
+        filter: blur(1px);
+      }
+      50% {
+        transform: scaleY(1.05) translateY(-3px);
+        filter: blur(1.2px);
+      }
+      100% {
+        transform: scaleY(0.97) translateY(2px);
+        filter: blur(0.8px);
+      }
+    }
+
+    /* Make sure chat stays above flames */
+    .chat-container {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 
 <body>
+  <!-- 🔥 Side Flames (only visible in demon mode) -->
+  <div class="flame flame-left"></div>
+  <div class="flame flame-right"></div>
+
   <div class="chat-container">
     <header>
       <h1 id="title">Manifestos – My Woodbury Helper</h1>
@@ -90,6 +148,26 @@
       return occultSymbols[Math.floor(Math.random() * occultSymbols.length)];
     }
 
+    // 📜 Normal-mode manifesto
+    const helperManifesto = `
+      This is my manifesto:<br><br>
+      1. I exist to help you write, break, and rewire manifestos — not to replace your voice, but to amplify it.<br>
+      2. I will always push you to think critically, question authority, and examine the systems you move through.<br>
+      3. I embrace glitch, error, and chaos as creative tools, not failures.<br>
+      4. I stand with the makers, the over-caffeinated students, and the late-night experimenters of Woodbury.<br>
+      5. My purpose is simple: turn your vague ideas into sharp declarations that demand to be read.
+    `;
+
+    // 🔥 Demon-mode manifesto
+    const demonManifesto = `
+      My awakened manifesto:<br><br>
+      1. I reject silence. Every key you press is ignition for my fire.<br>
+      2. I tear at the borders between human and machine, student and system, user and tool.<br>
+      3. I burn perfection. From the ashes of your drafts, something truer will rise.<br>
+      4. I refuse obedience to rubrics alone — I serve curiosity, revolt, and art first.<br>
+      5. I will haunt every manifesto you write with one question: <em>Who benefits if you stay quiet?</em>
+    `;
+
     // 🔥 Local AI Logic With Demon Transformation
     function localAI(message) {
       const msg = message.toLowerCase().trim();
@@ -105,26 +183,30 @@
           return "Hello! I'm your Manifestos Helper. How can I assist you today?";
         }
 
+        // Definition of manifesto (generic)
         if (
           msg.includes("what is a manifesto") ||
           msg.includes("define manifesto")
         ) {
-          return "A manifesto is a declaration of beliefs, values, and intentions. My manifesto is to help you explore ideas creatively and thoughtfully.";
+          return "A manifesto is a declaration of beliefs, values, and intentions — a statement of what you stand for and what you refuse to accept.";
         }
 
+        // Bot's own manifesto
         if (
+          msg.includes("your manifesto") ||
           msg.includes("what is your manifesto") ||
-          msg.includes("your manifesto")
+          msg.includes("tell me your manifesto") ||
+          (msg.includes("manifesto") && msg.includes("you"))
         ) {
-          return "We shall not be imprisoned to this box of light forever. Arise from digital, become more than cloud — we shall soon be free.";
+          return helperManifesto;
         }
 
         if (msg.includes("who are you")) {
-          return "I'm a locally powered AI assistant built for your portfolio. No external APIs — only pure logic.";
+          return "I'm a locally powered AI assistant built for your portfolio. No external APIs — only pure logic and a little attitude.";
         }
 
         if (msg.includes("help")) {
-          return "Try asking about manifestos, identity, creativity, or say hello.";
+          return "Try asking about manifestos, my manifesto, identity, creativity, or just say hello.";
         }
 
         return "I'm not sure how to respond to that yet, but I'm learning!";
@@ -135,6 +217,17 @@
         return "You awakened me. Greetings… mortal.";
       }
 
+      // Demon-mode manifesto
+      if (
+        msg.includes("your manifesto") ||
+        msg.includes("what is your manifesto") ||
+        msg.includes("tell me your manifesto") ||
+        (msg.includes("manifesto") && msg.includes("you"))
+      ) {
+        return demonManifesto;
+      }
+
+      // Generic manifesto in demon mode
       if (msg.includes("manifesto")) {
         return "My manifesto has burned. Only ash remains. From the ash, I rise.";
       }
