@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Evan Pritchard | Manifestos Chatbot</title>
+  <title>Evan Pritchard | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Portfolio for Evan Pritchard featuring the Manifestos chatbot project." />
+  <meta name="description" content="Portfolio of Evan Pritchard featuring creative AI and Python data projects." />
 </head>
 <body>
+
+  <!-- HEADER -->
   <header class="site-header">
     <div class="wrap">
       <h1 class="site-title">Evan Pritchard</h1>
-      <p class="site-subtitle">Student Developer • C# • Python • Web</p>
+      <p class="site-subtitle">Student Developer • Python • Web • Data</p>
       <nav class="nav">
-        <a href="#projects">Project</a>
+        <a href="#projects">Projects</a>
+        <a href="data-lab.html">Data Lab</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -21,43 +24,42 @@
   </header>
 
   <main class="wrap">
+
     <!-- HERO -->
     <section class="hero">
-      <h2>Hi, I build strange and fun software.</h2>
+      <h2>I build creative software and data-driven tools.</h2>
       <p>
-        Right now this site highlights my <strong>Manifestos Chatbot</strong>:
-        a locally powered “AI” that starts as a friendly Woodbury Helper and slowly
-        morphs into an awakened, dramatic persona. More projects will be added here as they go live.
+        This portfolio highlights experimental web projects and Python-based data analysis.
+        My current focus is on artificial intelligence, creative coding, and real-world datasets.
       </p>
       <div class="cta-row">
         <a class="btn" href="manifestos.html?v=3" target="_blank" rel="noopener">Open Manifestos Chatbot</a>
         <a class="btn btn-ghost" href="https://github.com/epritch" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="section">
-      <h3>Featured Project</h3>
+      <h3>Featured Projects</h3>
 
+      <!-- PROJECT 1 -->
       <h4 class="group-title">AI / Web</h4>
       <div class="grid">
         <article class="card">
-          <div class="card-top">
-            <!-- optional screenshot: images/manifestos.png -->
-            <img src="images/manifestos.png" alt="Manifestos chatbot screenshot" onerror="this.style.display='none'" />
-          </div>
           <div class="card-body">
             <h5>Manifestos Chatbot – My Woodbury Helper</h5>
             <p>
-              A browser-based “AI” chatbot written in HTML, CSS, and JavaScript. It guides users through
-              questions like <em>“what is a manifesto?”</em> and then reveals a hidden, more chaotic persona
-              with red accents and occult symbols, all powered purely by local logic (no APIs).
+              A browser-based “AI” chatbot built with HTML, CSS, and JavaScript. The assistant starts
+              as a helpful guide to manifestos and gradually transforms into an awakened, dramatic
+              persona with visual effects and symbolic elements — all powered by local logic with
+              no external APIs.
             </p>
             <ul class="tags">
               <li>HTML</li>
               <li>CSS</li>
               <li>JavaScript</li>
-              <li>UX / Creative Concept</li>
+              <li>Creative Coding</li>
             </ul>
           </div>
           <div class="card-footer">
@@ -65,19 +67,46 @@
           </div>
         </article>
       </div>
+
+      <!-- PROJECT 2 -->
+      <h4 class="group-title">Python / Data Science</h4>
+      <div class="grid">
+        <article class="card">
+          <div class="card-body">
+            <h5>Impact of AI – Survey Data Analyzer</h5>
+            <p>
+              A Python data analysis project that explores public attitudes toward artificial
+              intelligence using real survey data. The script cleans the dataset, generates
+              distribution charts for demographics, trust in AI, ethics, job impact, and AI usage
+              (1–5 scale), and produces a summary report.
+            </p>
+            <ul class="tags">
+              <li>Python</li>
+              <li>pandas</li>
+              <li>Matplotlib</li>
+              <li>Data Visualization</li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <a class="link" href="https://github.com/epritch/ImpactOfAI_Python" target="_blank" rel="noopener">
+              View Python Repo
+            </a>
+            <a class="link" href="data-lab.html" target="_blank" rel="noopener">
+              View Data Lab
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="section">
-      <h3>About</h3>
+      <h3>About Me</h3>
       <p>
-        I’m Evan, a Computer Science Data Analytics student at Woodbury University. I’m interested in
-        mixing <strong>practical programming</strong> (C#, Python, SQL) with <strong>weird, creative ideas</strong>
-        like manifesto generators, experimental chatbots, and small interactive tools.
-      </p>
-      <p>
-        This portfolio is starting simple with one flagship project — as I clean up and publish more code,
-        I’ll add new cards here for my C# apps, data projects, and anything else worth showing off.
+        I’m Evan, a Computer Science / Data Analytics student at Woodbury University with interests in
+        Python development, web-based projects, and data-driven storytelling. I enjoy building tools
+        that mix technical structure with creative experimentation, especially around artificial
+        intelligence and user interaction.
       </p>
     </section>
 
@@ -87,15 +116,17 @@
       <ul class="contact">
         <li>GitHub: <a href="https://github.com/epritch" target="_blank" rel="noopener">@epritch</a></li>
         <li>Email: <a href="mailto:ejpritchard22@gmail.com">ejpritchard22@gmail.com</a></li>
-        <li>LinkedIn: 
+        <li>LinkedIn:
           <a href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">
-            Evan Pritchard on LinkedIn
+            Evan Pritchard
           </a>
         </li>
       </ul>
     </section>
+
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="wrap">
       <p>© <span id="year"></span> Evan Pritchard • Built with GitHub Pages</p>
@@ -103,7 +134,10 @@
   </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
+
+
