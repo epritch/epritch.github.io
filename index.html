@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evan Pritchard | Data Analyst</title>
+  <meta name="description" content="Portfolio of Evan Pritchard — Data Analyst, Python developer, and CS/Data Analytics graduate." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg:       #080c10;
+      --bg2:      #0d1117;
+      --surface:  #111720;
+      --surface2: #161e2b;
+      --border:   #1e2d3d;
+      --border2:  #243447;
+      --accent:   #00e5a0;
+      --accent2:  #0ea5e9;
+      --accent3:  #f59e0b;
+      --text:     #e2eaf5;
+      --muted:    #7a8fa8;
+      --muted2:   #4a5e72;
+      --mono:     'IBM Plex Mono', monospace;
+      --sans:     'Instrument Sans', sans-serif;
+    }
+
+    /* ── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── GRID BACKGROUND ────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,160,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,160,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Radial glow behind hero */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(0,229,160,.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LAYOUT ─────────────────────────────────────────────── */
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 1080px; margin-inline: auto; padding: 0 24px; }
+
+    /* ── NAV ────────────────────────────────────────────────── */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,12,16,.82);
+      backdrop-filter: blur(12px) saturate(180%);
+    }
+    .nav-inner {
+      display: flex; align-items: center; gap: 20px;
+      padding: 14px 24px; max-width: 1080px; margin-inline: auto;
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: .85rem; font-weight: 600;
+      color: var(--accent); letter-spacing: .04em; white-space: nowrap;
+    }
+    .nav-logo span { color: var(--muted); }
+    .nav-links { margin-left: auto; display: flex; gap: 24px; }
+    .nav-links a {
+      font-family: var(--mono); font-size: .78rem; font-weight: 500;
+      color: var(--muted); text-decoration: none; letter-spacing: .06em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    .hero {
+      padding: 96px 0 72px;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: .78rem; font-weight: 500;
+      color: var(--accent); letter-spacing: .12em; text-transform: uppercase;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--accent);
+    }
+    .hero-name {
+      font-family: var(--sans); font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 700; line-height: 1.05; letter-spacing: -.02em;
+      margin-bottom: 16px; color: var(--text);
+    }
+    .hero-name .typed-wrap {
+      display: block; color: var(--accent);
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 500; margin-top: 8px;
+    }
+    .cursor {
+      display: inline-block; width: 2px; height: 1.1em;
+      background: var(--accent); vertical-align: text-bottom;
+      animation: blink .9s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-desc {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 580px; margin-bottom: 32px; line-height: 1.75;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 600; }
+
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px;
+    }
+    .badge {
+      font-family: var(--mono); font-size: .72rem; font-weight: 500;
+      padding: 4px 10px; border-radius: 4px; letter-spacing: .04em;
+      border: 1px solid var(--border2); background: var(--surface);
+      color: var(--muted2);
+    }
+    .badge.hi { border-color: rgba(0,229,160,.3); color: var(--accent); background: rgba(0,229,160,.05); }
+    .badge.hi2 { border-color: rgba(14,165,233,.3); color: var(--accent2); background: rgba(14,165,233,.05); }
+    .badge.hi3 { border-color: rgba(245,158,11,.3); color: var(--accent3); background: rgba(245,158,11,.05); }
+
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 8px;
+      font-family: var(--mono); font-size: .8rem; font-weight: 600;
+      text-decoration: none; letter-spacing: .04em; transition: all .2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent); color: #050a07;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: #00ffb3; border-color: #00ffb3; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border2);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted2); transform: translateY(-1px); }
+
+    /* ── STAT ROW ───────────────────────────────────────────── */
+    .stats-row {
+      display: flex; flex-wrap: wrap; gap: 0;
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin: 56px 0 0;
+    }
+    .stat {
+      flex: 1 1 160px; padding: 20px 28px;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-val {
+      font-family: var(--mono); font-size: 1.6rem; font-weight: 600;
+      color: var(--accent); line-height: 1;
+    }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: 4px; font-family: var(--mono); letter-spacing: .04em; }
+
+    /* ── SECTION ────────────────────────────────────────────── */
+    .section { padding: 72px 0; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+    .section-label {
+      font-family: var(--mono); font-size: .72rem; font-weight: 600;
+      color: var(--accent); letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-title { font-size: 1.8rem; font-weight: 700; letter-spacing: -.015em; margin-bottom: 40px; }
+
+    /* ── PROJECT GRID ───────────────────────────────────────── */
+    .proj-group-label {
+      font-family: var(--mono); font-size: .72rem; font-weight: 600;
+      color: var(--muted2); letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 16px; margin-top: 40px;
+    }
+    .proj-group-label:first-child { margin-top: 0; }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      opacity: 0; transform: translateY(20px);
+    }
+    .card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .5s ease, transform .5s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border2);
+      box-shadow: 0 16px 48px rgba(0,0,0,.4), 0 0 0 1px rgba(0,229,160,.08);
+    }
+
+    /* Card top accent bar */
+    .card-accent { height: 3px; background: var(--border); }
+    .card-accent.a1 { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .card-accent.a2 { background: linear-gradient(90deg, var(--accent2), #a855f7); }
+    .card-accent.a3 { background: linear-gradient(90deg, var(--accent3), #f87171); }
+    .card-accent.a4 { background: linear-gradient(90deg, #a855f7, var(--accent)); }
+    .card-accent.a5 { background: linear-gradient(90deg, var(--accent), #34d399); }
+    .card-accent.a6 { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
+    .card-accent.a7 { background: linear-gradient(90deg, #f59e0b, #f87171); }
+
+    .card-body { padding: 20px 20px 16px; flex: 1; }
+    .card-type {
+      font-family: var(--mono); font-size: .68rem; font-weight: 600;
+      color: var(--muted2); letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .card-title { font-size: 1.02rem; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+    .card-desc { font-size: .88rem; color: var(--muted); line-height: 1.65; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 20px 0; }
+    .tag {
+      font-family: var(--mono); font-size: .68rem;
+      padding: 3px 8px; border-radius: 4px;
+      border: 1px solid var(--border2);
+      color: var(--muted2); background: var(--bg2);
+      letter-spacing: .03em;
+    }
+    .tag.accent { border-color: rgba(0,229,160,.25); color: var(--accent); background: rgba(0,229,160,.05); }
+    .tag.blue   { border-color: rgba(14,165,233,.25); color: var(--accent2); background: rgba(14,165,233,.05); }
+    .tag.amber  { border-color: rgba(245,158,11,.25); color: var(--accent3); background: rgba(245,158,11,.05); }
+
+    .card-footer {
+      display: flex; gap: 4px; flex-wrap: wrap;
+      padding: 14px 20px; border-top: 1px solid var(--border);
+    }
+    .card-link {
+      font-family: var(--mono); font-size: .72rem; font-weight: 600;
+      color: var(--muted); text-decoration: none; padding: 5px 10px;
+      border-radius: 5px; border: 1px solid var(--border);
+      transition: all .15s; letter-spacing: .03em;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .card-link:hover { color: var(--accent); border-color: rgba(0,229,160,.35); background: rgba(0,229,160,.05); }
+
+    /* ── FEATURED CARD ──────────────────────────────────────── */
+    .card-featured {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 220px;
+      margin-bottom: 16px;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      opacity: 0; transform: translateY(20px);
+    }
+    .card-featured.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .5s ease, transform .5s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .card-featured:hover {
+      transform: translateY(-3px);
+      border-color: var(--border2);
+      box-shadow: 0 20px 56px rgba(0,0,0,.5), 0 0 0 1px rgba(0,229,160,.1);
+    }
+    .card-featured-body { padding: 28px 32px; display: flex; flex-direction: column; justify-content: center; }
+    .card-featured-visual {
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; overflow: hidden; position: relative;
+    }
+    /* Animated terminal in featured card */
+    .terminal-preview {
+      font-family: var(--mono); font-size: .72rem; color: var(--muted);
+      background: var(--bg); border: 1px solid var(--border2);
+      border-radius: 8px; padding: 14px 16px; width: 100%;
+      line-height: 1.9;
+    }
+    .t-line { display: flex; gap: 8px; }
+    .t-prompt { color: var(--accent); }
+    .t-cmd { color: var(--text); }
+    .t-out { color: var(--muted2); padding-left: 16px; }
+    .t-out.g { color: var(--accent); }
+    .t-out.b { color: var(--accent2); }
+
+    /* ── SKILLS GRID ────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .skill-group.visible { opacity: 1; transform: translateY(0); }
+    .skill-group-title {
+      font-family: var(--mono); font-size: .7rem; font-weight: 600;
+      color: var(--accent); letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 12px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .skill-list li {
+      font-size: .85rem; color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .skill-list li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--border2); flex-shrink: 0;
+    }
+    .skill-list li.active { color: var(--text); }
+    .skill-list li.active::before { background: var(--accent); }
+
+    /* ── EXPERIENCE ─────────────────────────────────────────── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid; grid-template-columns: 160px 1fr;
+      gap: 0 32px; padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0; transform: translateY(16px);
+    }
+    .exp-item.visible { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-date {
+      font-family: var(--mono); font-size: .75rem; color: var(--muted2);
+      padding-top: 3px; line-height: 1.5;
+    }
+    .exp-date .company { color: var(--accent); font-weight: 600; display: block; margin-bottom: 2px; }
+    .exp-content {}
+    .exp-role { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .exp-desc { font-size: .88rem; color: var(--muted); line-height: 1.65; }
+    .exp-desc ul { padding-left: 16px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+
+    /* ── ABOUT ──────────────────────────────────────────────── */
+    .about-grid { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
+    .about-text p { font-size: .95rem; color: var(--muted); line-height: 1.8; margin-bottom: 14px; }
+    .about-text p strong { color: var(--text); }
+    .about-aside {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .about-aside-title {
+      font-family: var(--mono); font-size: .7rem; font-weight: 600;
+      color: var(--accent); letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .edu-item { margin-bottom: 14px; }
+    .edu-school { font-size: .92rem; font-weight: 700; }
+    .edu-degree { font-size: .82rem; color: var(--muted); margin-top: 2px; }
+    .edu-meta { font-family: var(--mono); font-size: .72rem; color: var(--accent); margin-top: 4px; }
+
+    /* ── CONTACT ────────────────────────────────────────────── */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .contact-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 20px;
+      text-decoration: none; display: flex; flex-direction: column; gap: 4px;
+      transition: border-color .2s, transform .2s;
+    }
+    .contact-card:hover { border-color: rgba(0,229,160,.35); transform: translateY(-2px); }
+    .contact-card-label { font-family: var(--mono); font-size: .68rem; color: var(--muted2); letter-spacing: .08em; text-transform: uppercase; }
+    .contact-card-value { font-size: .9rem; color: var(--text); font-weight: 600; }
+
+    /* ── RESUME BANNER ──────────────────────────────────────── */
+    .resume-banner {
+      background: linear-gradient(135deg, rgba(0,229,160,.07), rgba(14,165,233,.07));
+      border: 1px solid rgba(0,229,160,.2);
+      border-radius: 12px; padding: 24px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap; margin-bottom: 56px;
+    }
+    .resume-banner-text h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .resume-banner-text p { font-size: .85rem; color: var(--muted); }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border); padding: 28px 0;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1080px; margin-inline: auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-family: var(--mono); font-size: .72rem; color: var(--muted2); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-family: var(--mono); font-size: .72rem; color: var(--muted2); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── SCROLL ANIMATION ───────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); }
+    .reveal.visible { opacity: 1; transform: none; transition: opacity .55s ease, transform .55s ease; }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .card-featured { grid-template-columns: 1fr; }
+      .card-featured-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 4px; }
+      .nav-links { gap: 14px; }
+      .hero { padding: 64px 0 48px; }
+    }
+    @media (max-width: 480px) {
+      .nav-links a:not(:last-child):not(:nth-last-child(2)) { display: none; }
+      .stats-row .stat:nth-child(n+4) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <div class="nav-logo">ep<span>.</span>dev</div>
+      <nav class="nav-links">
+        <a href="#projects">projects</a>
+        <a href="#skills">skills</a>
+        <a href="#experience">experience</a>
+        <a href="#about">about</a>
+        <a href="#contact">contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-eyebrow">Available for hire · Los Angeles, CA</div>
+        <h1 class="hero-name">
+          Evan Pritchard
+          <span class="typed-wrap"><span id="typed"></span><span class="cursor"></span></span>
+        </h1>
+        <p class="hero-desc">
+          <strong>CS / Data Analytics graduate</strong> from Woodbury University with hands-on experience in
+          SQL, Python, Excel, Power BI, and BI dashboard design. I build data tools that turn raw information
+          into decisions.
+        </p>
+        <div class="hero-badges">
+          <span class="badge hi">Python</span>
+          <span class="badge hi">SQL</span>
+          <span class="badge hi2">Power BI</span>
+          <span class="badge hi2">Excel · Power Query</span>
+          <span class="badge hi3">scikit-learn</span>
+          <span class="badge hi3">Streamlit</span>
+          <span class="badge">pandas · NumPy</span>
+          <span class="badge">Snowflake</span>
+          <span class="badge">Git</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="Resume_May_2026.pdf" target="_blank" rel="noopener">↓ Download Resume</a>
+          <a class="btn btn-ghost" href="https://github.com/epritch" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-val">3.77</div>
+            <div class="stat-label">GPA · magna cum laude</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">8</div>
+            <div class="stat-label">GitHub Repos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">2+</div>
+            <div class="stat-label">Years at Omega Cinema Props</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">6+</div>
+            <div class="stat-label">Tools · Stack</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="projects" class="section">
+      <div class="wrap">
+        <div class="section-label">01 · Work</div>
+        <h2 class="section-title">Featured Projects</h2>
+
+        <!-- BI & Data Analysis -->
+        <div class="proj-group-label">BI & Data Analysis</div>
+
+        <!-- Featured BI Dashboard -->
+        <div class="card-featured">
+          <div class="card-featured-body">
+            <div class="card-type">Featured · BI Dashboard</div>
+            <h3 class="card-title" style="font-size:1.15rem;margin-bottom:10px;">Superstore Sales Analytics Dashboard</h3>
+            <p class="card-desc" style="font-size:.88rem;">Power BI–style interactive sales dashboard with live KPI cards, trend lines, region bar charts, and filter slicers for year, category, and region. Dark BI aesthetic built in pure HTML/CSS/Chart.js — zero dependencies.</p>
+            <div class="tags" style="padding:14px 0 0;">
+              <span class="tag accent">Chart.js</span>
+              <span class="tag accent">HTML/CSS</span>
+              <span class="tag blue">BI Design</span>
+              <span class="tag blue">Slicers</span>
+              <span class="tag amber">KPI Cards</span>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px;">
+              <a class="card-link" href="https://epritch.github.io/bi-dashboard/" target="_blank" rel="noopener">↗ Live Dashboard</a>
+              <a class="card-link" href="https://github.com/epritch/bi-dashboard" target="_blank" rel="noopener">⌥ GitHub</a>
+            </div>
+          </div>
+          <div class="card-featured-visual">
+            <div class="terminal-preview">
+              <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">SELECT category, SUM(sales)</span></div>
+              <div class="t-line"><span class="t-out">  FROM order_items</span></div>
+              <div class="t-line"><span class="t-out">  GROUP BY category;</span></div>
+              <div class="t-line" style="margin-top:6px;"><span class="t-out g">Technology    $836,150</span></div>
+              <div class="t-line"><span class="t-out b">Furniture     $741,999</span></div>
+              <div class="t-line"><span class="t-out">Office Supp.  $719,047</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <div class="card-accent a2"></div>
+            <div class="card-body">
+              <div class="card-type">SQL · Case Study</div>
+              <h4 class="card-title">SQL Sales Analysis — 8-Query Case Study</h4>
+              <p class="card-desc">8 annotated queries on the Superstore dataset demonstrating JOINs across normalized tables, CTEs, LAG() YoY growth, RANK/DENSE_RANK, rolling 3-month averages, and CASE-band discount analysis. Written findings included.</p>
+            </div>
+            <div class="tags">
+              <span class="tag accent">CTEs</span>
+              <span class="tag accent">Window Functions</span>
+              <span class="tag blue">LAG · RANK</span>
+              <span class="tag">PostgreSQL</span>
+            </div>
+            <div class="card-footer">
+              <a class="card-link" href="https://github.com/epritch/sql-case-study" target="_blank" rel="noopener">⌥ GitHub Repo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-accent a3"></div>
+            <div class="card-body">
+              <div class="card-type">Excel · Power Query</div>
+              <h4 class="card-title">Excel Analytics Dashboard — 4-Sheet Workbook</h4>
+              <p class="card-desc">Professional Excel workbook with PivotTable-style summaries, KPI cards, conditional formatting (3-color margin scale), embedded charts, and a 10-step Power Query M language transformation reference.</p>
+            </div>
+            <div class="tags">
+              <span class="tag amber">Power Query</span>
+              <span class="tag amber">PivotTables</span>
+              <span class="tag">Cond. Formatting</span>
+              <span class="tag blue">Charts</span>
+            </div>
+            <div class="card-footer">
+              <a class="card-link" href="https://github.com/epritch/excel-dashboard" target="_blank" rel="noopener">⌥ GitHub Repo</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- ML & Data Science -->
+        <div class="proj-group-label" style="margin-top:48px;">ML & Data Science</div>
+        <div class="grid grid-2">
+          <article class="card">
+            <div class="card-accent a1"></div>
+            <div class="card-body">
+              <div class="card-type">Senior Project · Streamlit</div>
+              <h4 class="card-title">AI Job Market Mining Dashboard (2024–2030)</h4>
+              <p class="card-desc">Interactive data mining dashboard analyzing how AI is reshaping the job market. Applies PCA for dimensionality reduction and K-Means clustering to identify patterns across job roles, automation risk, and compensation.</p>
+            </div>
+            <div class="tags">
+              <span class="tag accent">Python</span>
+              <span class="tag accent">scikit-learn</span>
+              <span class="tag blue">PCA · K-Means</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag">Plotly</span>
+            </div>
+            <div class="card-footer">
+              <a class="card-link" href="https://ai-job-market-dashboard-5ebfp3kuvkcmdzqwc9rb8n.streamlit.app/" target="_blank" rel="noopener">↗ Live App</a>
+              <a class="card-link" href="https://github.com/epritch/ai-job-market-dashboard" target="_blank" rel="noopener">⌥ GitHub</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-accent a4"></div>
+            <div class="card-body">
+              <div class="card-type">Python · Streamlit</div>
+              <h4 class="card-title">Occupation Automation Risk Dashboard</h4>
+              <p class="card-desc">Explores occupation-level automation risk and employment distribution across U.S. states. Interactive filtering, PCA dimensionality reduction, and K-Means clustering reveal patterns in workforce automation exposure.</p>
+            </div>
+            <div class="tags">
+              <span class="tag accent">Python</span>
+              <span class="tag blue">PCA · K-Means</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">pandas</span>
+            </div>
+            <div class="card-footer">
+              <a class="card-link" href="https://automation-risk-dashboard-nkrzficjpwcptot5gkhdhv.streamlit.app/" target="_blank" rel="noopener">↗ Live App</a>
+              <a class="card-link" href="https://github.com/epritch/Automation-Risk-Dashboard" target="_blank" rel="noopener">⌥ GitHub</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-accent a5"></div>
+            <div class="card-body">
+              <div class="card-type">Python · Data Visualization</div>
+              <h4 class="card-title">Impact of AI — Survey Data Analyzer</h4>
+              <p class="card-desc">Explores public attitudes toward AI using real survey data. Cleans the dataset, generates distribution charts for demographics, trust, ethics, and job impact (1–5 scale), and produces a summary report.</p>
+            </div>
+            <div class="tags">
+              <span class="tag accent">pandas</span>
+              <span class="tag blue">Matplotlib</span>
+              <span class="tag">EDA</span>
+            </div>
+            <div class="card-footer">
+              <a class="card-link" href="https://github.com/epritch/ImpactOfAI_Python" target="_blank" rel="noopener">⌥ GitHub Repo</a>
+              <a class="card-link" href="data-lab.html">Data Lab ↗</a>
+            </div>
+          </article>
+
+          <!-- AI / Web -->
+          <article class="card">
+            <div class="card-accent a6"></div>
+            <div class="card-body">
+              <div class="card-type">AI · Web · Creative</div>
+              <h4 class="card-title">Manifestos Chatbot — My Woodbury Helper</h4>
+              <p class="card-desc">Browser-based chatbot built with HTML, CSS, and JavaScript. Starts as a helpful guide and gradually transforms into an awakened, dramatic persona — all powered by local logic, no external APIs.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">HTML · CSS · JS</span>
+              <span class="tag blue">Creative Coding</span>
+            </div>
+            <div class="card-footer">
+              <a class="card-link" href="manifestos.html?v=3" target="_blank" rel="noopener">↗ Open Chatbot</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SKILLS ── -->
+    <section id="skills" class="section">
+      <div class="wrap">
+        <div class="section-label">02 · Toolkit</div>
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <div class="skill-group-title">Languages</div>
+            <ul class="skill-list">
+              <li class="active">Python</li>
+              <li class="active">SQL (Oracle, SQL Server)</li>
+              <li class="active">R</li>
+              <li>Java</li>
+              <li>C#</li>
+              <li>SAS</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Data & ML</div>
+            <ul class="skill-list">
+              <li class="active">pandas · NumPy</li>
+              <li class="active">scikit-learn</li>
+              <li class="active">Regression · Classification</li>
+              <li class="active">Clustering · PCA</li>
+              <li class="active">EDA · Feature Engineering</li>
+              <li>Snowflake</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">BI & Visualization</div>
+            <ul class="skill-list">
+              <li class="active">Power BI</li>
+              <li class="active">Excel · Power Query</li>
+              <li class="active">PivotTables</li>
+              <li class="active">Plotly · Matplotlib</li>
+              <li class="active">Streamlit</li>
+              <li class="active">Chart.js</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Tools & Platforms</div>
+            <ul class="skill-list">
+              <li class="active">Git · GitHub</li>
+              <li class="active">VS Code · PyCharm</li>
+              <li class="active">Microsoft Office Suite</li>
+              <li class="active">Rental Tracker</li>
+              <li>Visual Studio</li>
+              <li>Photoshop</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── EXPERIENCE ── -->
+    <section id="experience" class="section">
+      <div class="wrap">
+        <div class="section-label">03 · History</div>
+        <h2 class="section-title">Experience & Leadership</h2>
+        <div class="exp-list">
+
+          <div class="exp-item">
+            <div class="exp-date">
+              <span class="company">Omega Cinema Props</span>
+              Aug 2024 – Apr 2026<br>Los Angeles, CA
+            </div>
+            <div class="exp-content">
+              <div class="exp-role">Data & Operations</div>
+              <div class="exp-desc">
+                <ul>
+                  <li>Assisted with inventory tracking, workflow optimization, and operational data organization using Rental Tracker and Excel</li>
+                  <li>Cleaned and maintained inventory databases — identifying duplicate, outdated, and inconsistent records</li>
+                  <li>Used Excel, Power BI, and cloud database systems to organize product data and improve asset accessibility</li>
+                  <li>Supported data accuracy and operational efficiency through catalog maintenance, reporting, and digital asset management</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-date">
+              <span class="company">WSTEM Club</span>
+              Aug 2024 – Apr 2026<br>Woodbury University
+            </div>
+            <div class="exp-content">
+              <div class="exp-role">Treasurer</div>
+              <div class="exp-desc">Managed the budget for the on-campus STEM club and hosted workshop events including introductions to building personal websites, open to all students.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-date">
+              <span class="company">WUGU Gaming Club</span>
+              Aug 2023 – May 2024<br>Woodbury University
+            </div>
+            <div class="exp-content">
+              <div class="exp-role">Treasurer</div>
+              <div class="exp-desc">Managed the club budget and organized campus events including Super Smash Bros. tournaments.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-date">
+              <span class="company">Gourmet Crust Pizza</span>
+              2019 – 2021<br>Burbank, CA
+            </div>
+            <div class="exp-content">
+              <div class="exp-role">Delivery Driver / Pizza Chef</div>
+              <div class="exp-desc">Worked in a fast-paced environment requiring time management and precision.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ABOUT ── -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <div class="section-label">04 · Background</div>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>I'm Evan, a <strong>CS / Data Analytics graduate</strong> from Woodbury University (GPA 3.77, magna cum laude, Dean's List every semester). I build data tools that turn messy information into clear decisions — whether that's a live BI dashboard, a SQL case study, an Excel model, or a Python ML pipeline.</p>
+            <p>My recent work at <strong>Omega Cinema Props</strong> gave me real hands-on experience with inventory data, Power BI reporting, and database maintenance in a production environment. That context — actual messy data, real stakeholders, real deadlines — is what I'm bringing to a data analyst role.</p>
+            <p>Outside of data work I enjoy creative coding, building interactive web tools, and experimenting with AI-adjacent projects. I care about work that's technically solid <em>and</em> visually clear — because insights no one reads don't help anyone.</p>
+          </div>
+          <div class="about-aside reveal">
+            <div class="about-aside-title">Education</div>
+            <div class="edu-item">
+              <div class="edu-school">Woodbury University</div>
+              <div class="edu-degree">BS · Computer Science / Data Analytics</div>
+              <div class="edu-meta">Graduated April 2026 · GPA 3.77 · Magna Cum Laude</div>
+            </div>
+            <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px;">
+              <div class="about-aside-title">Honors</div>
+              <ul class="skill-list">
+                <li class="active">Dean's List — all semesters</li>
+                <li class="active">Magna Cum Laude</li>
+                <li class="active">WSTEM Club Treasurer</li>
+                <li class="active">WUGU Club Treasurer</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section id="contact" class="section">
+      <div class="wrap">
+        <div class="section-label">05 · Connect</div>
+        <h2 class="section-title">Get in Touch</h2>
+
+        <div class="resume-banner reveal">
+          <div class="resume-banner-text">
+            <h4>Looking for a data analyst role in Los Angeles</h4>
+            <p>Open to full-time positions, internships, and contract work. Resume available on request or via download.</p>
+          </div>
+          <a class="btn btn-primary" href="Resume_May_2026.pdf" target="_blank" rel="noopener">↓ Download Resume</a>
+        </div>
+
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:ejpritchard22@gmail.com">
+            <span class="contact-card-label">Email</span>
+            <span class="contact-card-value">ejpritchard22@gmail.com</span>
+          </a>
+          <a class="contact-card" href="https://github.com/epritch" target="_blank" rel="noopener">
+            <span class="contact-card-label">GitHub</span>
+            <span class="contact-card-value">@epritch</span>
+          </a>
+          <a class="contact-card" href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">
+            <span class="contact-card-label">LinkedIn</span>
+            <span class="contact-card-value">Evan Pritchard</span>
+          </a>
+          <a class="contact-card" href="tel:8586998012">
+            <span class="contact-card-label">Phone</span>
+            <span class="contact-card-value">858-699-8012</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">© <span id="yr"></span> Evan Pritchard · Built with GitHub Pages</span>
+      <div class="footer-links">
+        <a href="https://github.com/epritch" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/evan-pritchard-9a0922168/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="data-lab.html">Data Lab</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── YEAR ────────────────────────────────────────────────────
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // ── TYPEWRITER ──────────────────────────────────────────────
+    const phrases = [
+      'Data Analyst',
+      'Python Developer',
+      'BI Dashboard Builder',
+      'SQL Engineer',
+    ];
+    let pi = 0, ci = 0, deleting = false;
+    const el = document.getElementById('typed');
+
+    function type() {
+      const phrase = phrases[pi % phrases.length];
+      if (!deleting) {
+        el.textContent = phrase.slice(0, ++ci);
+        if (ci === phrase.length) { deleting = true; setTimeout(type, 1800); return; }
+      } else {
+        el.textContent = phrase.slice(0, --ci);
+        if (ci === 0) { deleting = false; pi++; setTimeout(type, 300); return; }
+      }
+      setTimeout(type, deleting ? 45 : 80);
+    }
+    setTimeout(type, 600);
+
+    // ── SCROLL REVEAL ───────────────────────────────────────────
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // Stagger cards in the same parent
+          const siblings = e.target.parentElement.querySelectorAll(
+            '.card, .card-featured, .exp-item, .skill-group, .reveal'
+          );
+          let delay = 0;
+          siblings.forEach((s, idx) => {
+            if (s === e.target) delay = idx * 80;
+          });
+          setTimeout(() => e.target.classList.add('visible'), delay);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.card, .card-featured, .exp-item, .skill-group, .reveal')
+      .forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
